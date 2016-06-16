@@ -4,7 +4,7 @@
   "version": "0.0.3",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/llqgithub/smart-api.git"
+    "url": "git+https://github.com/llqgit/smart-api.git"
   },
   "keywords": [
     "api",
@@ -15,9 +15,9 @@
   "author": "LLQ",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/llqgithub/smart-api/issues"
+    "url": "https://github.com/llqgit/smart-api/issues"
   },
-  "homepage": "https://github.com/llqgithub/smart-api#readme",
+  "homepage": "https://github.com/llqgit/smart-api#readme",
   "dependencies": {
     "express": "^4.13.4"
   },
