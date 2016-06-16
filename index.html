@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart-api</title>
+  <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style>
+    header {
+      position: relative;
+      text-align: center;
+      background-color: #27AE60;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      text-shadow: -5px 5px 0 rgba(0, 0, 0, 0.1);
+    }
+    header .search-btn {
+      position: absolute;
+      right: 14px;
+      top: 8px;
+      color: #eee;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    header .search-btn:hover {
+      color: #ccc;
+    }
+    header .search {
+      border: 0px;
+      border-radius: 0px;
+      height: 42px;
+    }
+    header .form-group {
+      position: relative;
+    }
+
+    footer {
+      position: relative;
+      background-color: #27AE60;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    .template {
+      display: none;
+    }
+    .api:hover {
+      background-color: #eee;
+      cursor: pointer;
+    }
+    .api-name {
+      color: #555;
+      margin: 0px;
+    }
+    .api-info {
+      color: #777;
+    }
+    .api-extra-info {
+      color: #aaa;
+    }
+
+    .search {
+      text-align: center;
+    }
+
+
+  </style>
+</head>
+<body>
+  <!-- header -->
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1>Smart-API</h1>
+          <p>
+            检索，整理API文档
+            <br> 
+            <small class="api-amount">共收录了 <strong>2236</strong> 个</small>
+          </p>
+          <!-- <form class="" role="search"> -->
+            <div class="form-group">
+              <input type="text" class="form-control search clearable" placeholder="搜索API，例如：add user">
+              <i class="search-btn fa fa-search"></i>
+            </div>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- body -->
+  <div class="container">
+  
+    <div class="row">
+      <ul class="list-group api-list">
+
+        <li class="list-group-item api">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 class="api-name">/user/login</h4>
+            </div>
+            <div class="col-md-9 hidden-xs">
+              <p class="api-info">用户登录接口</p>
+            </div>
+            <div class="api-extra-info col-md-9 col-md-offset-3 col-xs-12">
+              <span>
+                <i class="fa fa-copy"></i> 96287
+              </span>
+            </div>
+          </div>          
+        </li>
+
+        <li class="list-group-item api">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 class="api-name">/user/bind_weixin</h4>
+            </div>
+            <div class="col-md-9 hidden-xs">
+              <p class="api-info">用户绑定微信接口</p>
+            </div>
+            <div class="api-extra-info col-md-9 col-md-offset-3 col-xs-12">
+              <span>
+                <i class="fa fa-copy"></i> 2389
+              </span>
+            </div>
+          </div>          
+        </li>
+
+        <li class="list-group-item api">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 class="api-name">/address/add</h4>
+            </div>
+            <div class="col-md-9 hidden-xs">
+              <p class="api-info">收货地址添加</p>
+            </div>
+            <div class="api-extra-info col-md-9 col-md-offset-3 col-xs-12">
+              <span>
+                <i class="fa fa-copy"></i> 1233
+              </span>
+            </div>
+          </div>          
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          See ya.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- template -->
+  <div class="template template-api">
+    <li class="list-group-item api">
+      <div class="row">
+        <div class="col-md-3">
+          <h4 class="api-name">/user/patient/bind_teams</h4>
+        </div>
+        <div class="col-md-9 hidden-xs">
+          <p class="api-info">患者绑定医疗团队</p>
+        </div>
+        <div class="api-extra-info col-md-9 col-md-offset-3 col-xs-12">
+          <span>
+            <i class="fa fa-copy"></i> 96287
+          </span>
+        </div>
+      </div>          
+    </li>
+  </div>
+
+  
+  <!-- js -->
+  <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+  <script>
+    // aaaa bbbb
+    // aaa+bbb
+    // aaa + bbb
+    // aaabbb
+    // aaa     bbb
+    // aaa    +  bbbb
+    var fomatToWords = function(str){
+      var words = [];
+      var result = str.replace(/\++/g, ' ').replace(/\s+/g, ' ');
+      // console.log(result);
+      words = result.split(' ');
+      return words;
+    };
+
+    // search from [api-name, api-info]
+    var search = function(words){
+
+      $('.api-list').find('.api').each(function(index, el) {
+        var $api = $(this);
+        var api_name = $api.find('.api-name').text();
+        var api_info = $api.find('.api-info').text();
+        var is_match_name = true;
+        var is_match_info = true;
+        for(var i in words) {
+          if(is_match_name && !api_name.match(words[i])) {
+            is_match_name = false;
+          }
+          if(is_match_info && !api_info.match(words[i])) {
+            is_match_info = false
+          }
+        }
+
+        if(!is_match_name && !is_match_info) {
+          $api.hide();
+        } else {
+          $api.show();
+        }
+      });
+    };
+
+    // 重置列表
+    var reset = function() {
+      $('.api-list').find('.api').show();
+    };
+
+
+    $(function(){
+
+      // 查询事件
+      $('.search').keyup(function(event) {
+        var str = $(this).val();
+        if(str) {
+          $('.fa-search').addClass('fa-close x').removeClass('fa-search').click(function(event) {
+            $(this).removeClass('fa-close x').addClass('fa-search');
+            $('.search').val('');
+            reset();
+          });
+        } else {
+          $('.x').removeClass('fa-close x').addClass('fa-search');
+        }
+        var words = fomatToWords(str);
+        search(words);
+        
+      });
+
+      // 初始化API总数
+      var api_amount = $('.api-list').find('.api').length;
+      $('.api-amount strong').text(api_amount);
+    });
+  </script>
+</body>
+</html>
